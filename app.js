@@ -168,3 +168,31 @@ function drawTeam2() {
 
 drawTeam2()
 
+function bet5() {
+  console.log("Bet 5")
+}
+
+function bet25() {
+  console.log('Bet 25')
+}
+
+function bet100() {
+  console.log('Bet 100')
+}
+
+function betAll() {
+  console.log('Bet All')
+}
+
+let team1 = []
+function playerTeam1() {
+  team1 = players.filter(player => player.teamNumber == 1)
+  console.log(team1)
+}
+
+let team2 = []
+function playerTeam2() {
+  team2 = players.filter(player => player.teamNumber == 2)
+  console.log(team2)
+}
+
