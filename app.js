@@ -122,3 +122,49 @@ const players = [
     skill: 100
   },
 ]
+
+// select teams at random
+// draw players to the players field on HTML
+
+function draftPlayers() {
+  console.log('Players')
+  for (let i = 0; i < players.length; i++) {
+    let player = players[i]
+    player.teamNumber = (Math.round(Math.random())) + 1
+    console.log('Players Name', player)
+  }
+}
+
+draftPlayers()
+
+
+function drawTeam1() {
+  let team1 = players.filter(team1 => team1.teamNumber == 1)
+  console.log('Team 1', team1)
+  let playerHTML = ''
+  for (let i = 0; i < team1.length; i++) {
+    let player = players[i]
+    playerHTML += `${player.emoji}`
+    console.log(playerHTML)
+    const team1Elm = document.getElementById('team-1')
+    team1Elm.innerHTML = playerHTML
+  }
+}
+
+drawTeam1()
+
+function drawTeam2() {
+  let team2 = players.filter(team2 => team2.teamNumber == 2)
+  console.log('Team 2', team2)
+  let playerHTML = ''
+  for (let i = 0; i < team2.length; i++) {
+    let player = players[i]
+    playerHTML += `${player.emoji}`
+    console.log(playerHTML)
+    const team2Elm = document.getElementById('team-2')
+    team2Elm.innerHTML = playerHTML
+  }
+}
+
+drawTeam2()
+
