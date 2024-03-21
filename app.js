@@ -1,5 +1,3 @@
-let bank = 100
-
 const players = [
   {
     name: "D'Marcus Williums",
@@ -123,6 +121,12 @@ const players = [
   },
 ]
 
+let team1Skill
+let team2Skill
+let bank = 100
+
+let team1 = []
+let team2 = []
 // select teams at random
 // draw players to the players field on HTML
 
@@ -139,7 +143,7 @@ draftPlayers()
 
 
 function drawTeam1() {
-  let team1 = players.filter(team1 => team1.teamNumber == 1)
+  team1 = players.filter(team1 => team1.teamNumber == 1)
   console.log('Team 1', team1)
   let playerHTML = ''
   for (let i = 0; i < team1.length; i++) {
@@ -154,7 +158,7 @@ function drawTeam1() {
 drawTeam1()
 
 function drawTeam2() {
-  let team2 = players.filter(team2 => team2.teamNumber == 2)
+  team2 = players.filter(team2 => team2.teamNumber == 2)
   console.log('Team 2', team2)
   let playerHTML = ''
   for (let i = 0; i < team2.length; i++) {
@@ -168,8 +172,19 @@ function drawTeam2() {
 
 drawTeam2()
 
-function bet5() {
+function bet5(selectedTeam) {
   console.log("Bet 5")
+  let winner = compareSkill()
+  if (selectedTeam == winner) {
+    bank += 5
+  } else if (selectedTeam != winner) {
+    bank -= 5
+  }
+  updateBank()
+  draftPlayers()
+  drawTeam1()
+  drawTeam2()
+  teamSkill()
 }
 
 function bet25() {
@@ -184,15 +199,42 @@ function betAll() {
   console.log('Bet All')
 }
 
-let team1 = []
-function playerTeam1() {
-  team1 = players.filter(player => player.teamNumber == 1)
-  console.log(team1)
+function updateBank() {
+  let updateBankElm = document.getElementById('bank')
+  updateBankElm.innerText = bank.toString()
+
 }
 
-let team2 = []
-function playerTeam2() {
-  team2 = players.filter(player => player.teamNumber == 2)
-  console.log(team2)
-}
+// function playerTeam1() {
+//   team1 = players.filter(player => player.teamNumber == 1)
+//   console.log(team1)
+// }
 
+
+// function playerTeam2() {
+//   team2 = players.filter(player => player.teamNumber == 2)
+//   console.log(team2)
+// }
+
+
+
+function teamSkill() {
+  team1Skill = 0
+  team2Skill = 0
+  team1.forEach(player => team1Skill += player.skill)
+  team2.forEach(player => team2Skill += player.skill)
+  console.log(team1Skill)
+}
+teamSkill()
+
+function compareSkill() {
+  let winningTeam
+  if (team1Skill > team2Skill) {
+    winningTeam = 'Team1'
+  } else if (team2Skill > team1Skill) {
+    winningTeam = 'Team2'
+  } else {
+    winningTeam = 'None'
+  }
+  return winningTeam
+}
